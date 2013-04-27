@@ -58,35 +58,39 @@ platforms:
       cpus: 2
       memory: 1024
 suites:
-- name: server
+- name: jenkins_master
   run_list:
-  - recipe[jenkins::server]
+  - recipe[jenkins-test::jenkins_master]
   attributes: {}
-- name: server-proxy-nginx
+- name: jenkins_plugin
   run_list:
-  - recipe[jenkins::server]
-  - recipe[jenkins::proxy_nginx]
-  attributes:
-    jenkins:
-      http_proxy:
-        host_name: 33.33.33.10
-        variant: nginx
-- name: server-proxy-apache2
-  run_list:
-  - recipe[jenkins::server]
-  - recipe[jenkins::proxy_apache2]
-  attributes:
-    jenkins:
-      http_proxy:
-        host_name: 33.33.33.10
-        variant: apache2
-- name: server-proxy-apache2-basicauth
-  run_list:
-  - recipe[jenkins::server]
-  - recipe[jenkins::proxy_apache2]
-  attributes:
-    jenkins:
-      http_proxy:
-        host_name: 33.33.33.10
-        variant: apache2
-        server_auth_method: basic
+  - recipe[jenkins-test::jenkins_plugin]
+  attributes: {}
+# - name: server-proxy-nginx
+#   run_list:
+#   - recipe[jenkins::server]
+#   - recipe[jenkins::proxy_nginx]
+#   attributes:
+#     jenkins:
+#       http_proxy:
+#         host_name: 33.33.33.10
+#         variant: nginx
+# - name: server-proxy-apache2
+#   run_list:
+#   - recipe[jenkins::server]
+#   - recipe[jenkins::proxy_apache2]
+#   attributes:
+#     jenkins:
+#       http_proxy:
+#         host_name: 33.33.33.10
+#         variant: apache2
+# - name: server-proxy-apache2-basicauth
+#   run_list:
+#   - recipe[jenkins::server]
+#   - recipe[jenkins::proxy_apache2]
+#   attributes:
+#     jenkins:
+#       http_proxy:
+#         host_name: 33.33.33.10
+#         variant: apache2
+#         server_auth_method: basic
